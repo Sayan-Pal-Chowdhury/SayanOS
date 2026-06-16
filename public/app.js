@@ -30,7 +30,7 @@ function animateSignals() {
       const b = points[j];
       const dist = Math.hypot(a.x - b.x, a.y - b.y);
       if (dist < 130) {
-        ctx.strokeStyle = `rgba(98, 247, 211, ${0.12 * (1 - dist / 130)})`;
+        ctx.strokeStyle = `rgba(59, 130, 246, ${0.16 * (1 - dist / 130)})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
@@ -41,7 +41,7 @@ function animateSignals() {
   }
 
   points.forEach(point => {
-    ctx.fillStyle = "rgba(238, 244, 255, 0.35)";
+    ctx.fillStyle = "rgba(0, 184, 148, 0.32)";
     ctx.beginPath();
     ctx.arc(point.x, point.y, 1.4, 0, Math.PI * 2);
     ctx.fill();
