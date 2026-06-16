@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayan OS | Snake</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="module.css">
+</head>
+<body class="module-body">
+  <main class="module-shell">
+    <a class="back-link" href="index.html">Back to Sayan OS</a>
+    <section class="game-layout">
+      <div>
+        <p class="eyebrow">Interactive JavaScript module</p>
+        <h1>Snake Game</h1>
+        <p class="hero-line">A compact browser game using keyboard controls, a canvas game loop, collision detection and score state.</p>
+        <div class="game-stats">
+          <div><span>Score</span><strong id="score">0</strong></div>
+          <div><span>Best</span><strong id="bestScore">0</strong></div>
+        </div>
+        <button id="restartGame" class="primary-btn">Restart</button>
+      </div>
+      <div class="snake-stage">
+        <canvas id="snakeCanvas" width="520" height="520" aria-label="Snake game board"></canvas>
+        <div class="touch-pad" aria-label="Snake touch controls">
+          <button data-dir="up" aria-label="Move up">Up</button>
+          <button data-dir="left" aria-label="Move left">Left</button>
+          <button data-dir="down" aria-label="Move down">Down</button>
+          <button data-dir="right" aria-label="Move right">Right</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="snake.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayan OS | Expense Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="module.css">
+</head>
+<body class="module-body">
+  <main class="module-shell">
+    <a class="back-link" href="index.html">Back to Sayan OS</a>
+    <section class="expense-layout">
+      <div>
+        <p class="eyebrow">Interactive JavaScript module</p>
+        <h1>Daily Expense Tracker</h1>
+        <p class="hero-line">A small practical app for transaction entry, category tracking, local storage and daily/monthly summaries.</p>
+        <div class="expense-stats">
+          <div><span>Today</span><strong id="todayTotal">Rs 0</strong></div>
+          <div><span>This month</span><strong id="monthTotal">Rs 0</strong></div>
+        </div>
+      </div>
+      <div class="expense-board">
+        <form id="expenseForm" class="expense-form">
+          <input id="expenseTitle" type="text" placeholder="Expense title" required>
+          <input id="expenseAmount" type="number" min="1" placeholder="Amount" required>
+          <select id="expenseCategory">
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Business</option>
+            <option>Shopping</option>
+            <option>Other</option>
+          </select>
+          <button type="submit">Add</button>
+        </form>
+        <div id="expenseList" class="expense-list" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+  <script src="expense.js"></script>
+</body>
+</html>

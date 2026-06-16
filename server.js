@@ -1,0 +1,75 @@
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+require("dotenv").config();
+const { GoogleGenAI } = require("@google/genai");
+const { retrieveKnowledge } = require("./knowledge");
+
+const app = express();
+const PORT = process.env.PORT || 8090;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const ai = GEMINI_API_KEY ? new GoogleGenAI({ apiKey: GEMINI_API_KEY }) : null;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/health", (req, res) => {
+  res.json({ ok: true, aiConfigured: Boolean(GEMINI_API_KEY) });
+});
+
+app.post("/ask-sayan", async (req, res) => {
+  try {
+    const question = String(req.body?.question || "").trim().slice(0, 500);
+    if (!question) return res.status(400).json({ error: "question is required" });
+
+    const context = retrieveKnowledge(question, 5);
+    if (!ai) {
+      return res.json({
+        mode: "local-rag-demo",
+        answer: fallbackAnswer(question, context),
+        sources: context.map(item => item.title),
+      });
+    }
+
+    const prompt = `
+You are Sayan OS, an AI-enabled portfolio assistant for Sayan Pal Chowdhury.
+Answer recruiter-style questions using only the supplied portfolio context.
+Be confident, specific, honest and concise. Do not invent credentials or companies.
+
+Question:
+${question}
+
+Portfolio context:
+${context.map(item => `- ${item.title}: ${item.content}`).join("\n")}
+
+Return a helpful answer in 2 to 5 short paragraphs.`;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: { temperature: 0.25, maxOutputTokens: 700 }
+    });
+
+    res.json({
+      mode: "gemini-rag",
+      answer: response.text || fallbackAnswer(question, context),
+      sources: context.map(item => item.title),
+    });
+  } catch (error) {
+    console.error("Ask Sayan error:", error);
+    res.status(500).json({ error: "Failed to answer", details: error.message });
+  }
+});
+
+function fallbackAnswer(question, context) {
+  if (!context.length) {
+    return "Sayan OS can answer questions about Sayan's projects, skills, Zuno, AI work, data projects and career journey.";
+  }
+  const joined = context.slice(0, 3).map(item => item.content).join(" ");
+  return joined.length > 620 ? `${joined.slice(0, 620)}...` : joined;
+}
+
+app.listen(PORT, () => {
+  console.log(`Sayan OS running at http://localhost:${PORT}`);
+});

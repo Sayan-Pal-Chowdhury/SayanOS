@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sayan OS | AI Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="signalCanvas" aria-hidden="true"></canvas>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Sayan OS home">
+      <span class="brand-mark">SO</span>
+      <span>Sayan OS</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#ask">Ask</a>
+      <a href="#zuno">Zuno</a>
+      <a href="#modules">Modules</a>
+      <a href="#timeline">Journey</a>
+    </nav>
+    <a class="resume-link" href="mailto:sayan123401@gmail.com">Contact</a>
+  </header>
+
+  <main id="home">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">AI-enabled portfolio operating system</p>
+        <h1>Sayan OS</h1>
+        <p class="hero-line">Data, Backend & AI Builder turning real business problems into working products.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#ask">Ask Sayan OS</a>
+          <a class="secondary-btn" href="#zuno">Explore Projects</a>
+        </div>
+      </div>
+
+      <div class="os-panel reveal" aria-label="Sayan OS status panel">
+        <div class="panel-header">
+          <span class="status-dot"></span>
+          <span>Portfolio AI Stack</span>
+        </div>
+        <div class="stack-grid">
+          <span>LLM</span><strong>Gemini</strong>
+          <span>RAG</span><strong>Project Knowledge</strong>
+          <span>Vector DB</span><strong>Qdrant in Zuno</strong>
+          <span>Backend</span><strong>Node.js</strong>
+          <span>Frontend</span><strong>HTML/CSS/JS</strong>
+          <span>Lab</span><strong>ZunoTinyGPT</strong>
+        </div>
+        <div class="visit-meter" aria-label="Portfolio visit counter">
+          <span>Portfolio visits</span>
+          <strong id="visitCountdown">1000</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="ask" class="section-shell ask-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Recruiter console</p>
+        <h2>Ask this portfolio about Sayan.</h2>
+      </div>
+
+      <div class="ask-layout reveal">
+        <div class="chat-card">
+          <div id="chatLog" class="chat-log" aria-live="polite">
+            <div class="message bot">
+              <span>Sayan OS</span>
+              <p>Ask about Zuno, AI integration, data projects, backend work, or why Sayan is worth interviewing.</p>
+            </div>
+          </div>
+          <form id="askForm" class="ask-form">
+            <input id="questionInput" type="text" placeholder="Why should I hire Sayan?" autocomplete="off">
+            <button type="submit">Ask</button>
+          </form>
+        </div>
+
+        <div class="prompt-grid">
+          <button class="prompt-chip">Why should I hire Sayan?</button>
+          <button class="prompt-chip">Explain Zuno's AI architecture.</button>
+          <button class="prompt-chip">What are Sayan's strongest skills?</button>
+          <button class="prompt-chip">Show his data projects.</button>
+          <button class="prompt-chip">What makes his journey different?</button>
+          <button class="prompt-chip">What is ZunoTinyGPT?</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="zuno" class="section-shell zuno-section">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Flagship product</p>
+        <h2>Zuno: AI-powered business operations platform.</h2>
+      </div>
+      <article class="feature-card reveal">
+        <div>
+          <h3>Built for small shopkeepers, shaped by real business operations.</h3>
+          <p>Zuno manages sales, billing, inventory, credit, customer storefronts, live orders, analytics and AI-assisted workflows from one full-stack platform.</p>
+          <div class="link-row">
+            <a href="https://sale-data-8d963.web.app" target="_blank" rel="noreferrer">Live App</a>
+            <a href="https://github.com/Sayan-Pal-Chowdhury/Zuno" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+        <div class="feature-stats">
+          <div><strong>LLM</strong><span>Gemini</span></div>
+          <div><strong>RAG</strong><span>Business context</span></div>
+          <div><strong>Vector</strong><span>Qdrant memory</span></div>
+          <div><strong>Chain</strong><span>LangChain</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="modules" class="section-shell">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Interactive modules</p>
+        <h2>Proof that runs in the browser.</h2>
+      </div>
+      <div class="arcade-card reveal">
+        <div class="arcade-copy">
+          <span class="module-tag">Live JavaScript Arcade</span>
+          <h3>Snake starts right here.</h3>
+          <p>A small playable module on the portfolio itself, built with canvas, state, collision logic and touch controls.</p>
+          <div class="arcade-meta">
+            <span>Score <strong id="miniSnakeScore">0</strong></span>
+            <button id="miniSnakeRestart" type="button">Restart</button>
+          </div>
+        </div>
+        <div class="mini-game">
+          <canvas id="miniSnakeCanvas" width="360" height="220" aria-label="Mini Snake game"></canvas>
+          <div class="mini-controls" aria-label="Mini Snake controls">
+            <button data-mini-dir="up" type="button">Up</button>
+            <button data-mini-dir="left" type="button">Left</button>
+            <button data-mini-dir="down" type="button">Down</button>
+            <button data-mini-dir="right" type="button">Right</button>
+          </div>
+        </div>
+      </div>
+      <div class="module-grid">
+        <a class="module-card reveal" href="snake.html">
+          <span class="module-tag">JavaScript Game</span>
+          <h3>Snake Game</h3>
+          <p>Keyboard controls, collision detection, game loop, scoring and responsive canvas rendering.</p>
+        </a>
+        <a class="module-card reveal" href="expense.html">
+          <span class="module-tag">Daily Utility</span>
+          <h3>Expense Tracker</h3>
+          <p>Daily transactions, categories, summaries, local storage and practical UI state management.</p>
+        </a>
+        <a class="module-card reveal" href="https://github.com/Sayan-Pal-Chowdhury/PhonePe-Analysis-Python" target="_blank" rel="noreferrer">
+          <span class="module-tag">Python Data</span>
+          <h3>PhonePe Analysis</h3>
+          <p>Pandas and NumPy analysis of transaction and user patterns across India.</p>
+        </a>
+        <a class="module-card reveal" href="https://github.com/Sayan-Pal-Chowdhury/E-Commerce-SQL-CASE-STUDY" target="_blank" rel="noreferrer">
+          <span class="module-tag">SQL Analytics</span>
+          <h3>E-Commerce SQL</h3>
+          <p>Joins, aggregations, validation and customer/product sales insights.</p>
+        </a>
+        <a class="module-card reveal" href="https://github.com/Sayan-Pal-Chowdhury/Power-BI" target="_blank" rel="noreferrer">
+          <span class="module-tag">Dashboarding</span>
+          <h3>Power BI Dashboards</h3>
+          <p>Sales, KPIs, YoY trends, customer behavior and performance reporting.</p>
+        </a>
+        <a class="module-card reveal" href="../ZunoTinyGPT/README.md">
+          <span class="module-tag">AI Lab</span>
+          <h3>ZunoTinyGPT</h3>
+          <p>A small GPT-style Transformer project for learning tokenization, attention and training loops.</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="timeline" class="section-shell">
+      <div class="section-heading reveal">
+        <p class="eyebrow">Build log</p>
+        <h2>From automation to AI systems.</h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item reveal"><span>2022</span><p>Infosys System Engineer: Java, Selenium, automation workflows, validation and debugging.</p></div>
+        <div class="timeline-item reveal"><span>2024</span><p>Deepened data analytics: Python, SQL, Power BI, Excel, dashboards and datasets.</p></div>
+        <div class="timeline-item reveal"><span>Ops</span><p>Worked with real shop and wholesale operations: sales, stock, credit, delivery and cash flow.</p></div>
+        <div class="timeline-item reveal"><span>Zuno</span><p>Built the business operations platform end to end, then added AI, RAG, Qdrant and LangChain.</p></div>
+        <div class="timeline-item reveal"><span>Next</span><p>Building ZunoTinyGPT to understand Transformer internals and connect an experimental model back to Zuno.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Sayan OS</span>
+    <div>
+      <a href="mailto:sayan123401@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/sayan-chowdhury-44aa83b2/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="https://github.com/Sayan-Pal-Chowdhury" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
