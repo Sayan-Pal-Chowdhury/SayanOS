@@ -36,6 +36,7 @@ app.post("/ask-sayan", async (req, res) => {
 You are Sayan OS, an AI-enabled portfolio assistant for Sayan Pal Chowdhury.
 Answer recruiter-style questions using only the supplied portfolio context.
 Be confident, specific, honest and concise. Do not invent credentials or companies.
+Write 90 to 140 words. Finish with a complete final sentence.
 
 Question:
 ${question}
@@ -43,12 +44,12 @@ ${question}
 Portfolio context:
 ${context.map(item => `- ${item.title}: ${item.content}`).join("\n")}
 
-Return a helpful answer in 2 to 5 short paragraphs.`;
+Return a helpful answer in 2 short paragraphs.`;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
-      config: { temperature: 0.25, maxOutputTokens: 700 }
+      config: { temperature: 0.25, maxOutputTokens: 900 }
     });
 
     res.json({
