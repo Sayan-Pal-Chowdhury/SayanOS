@@ -28,10 +28,61 @@ body {
   overflow-x: hidden;
 }
 
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mesh {
+  position: absolute;
+  width: 42vw;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  filter: blur(34px);
+  opacity: 0.42;
+  transform: translate3d(0, 0, 0);
+}
+
+.mesh-one {
+  left: -10vw;
+  top: 8vh;
+  background: radial-gradient(circle, rgba(0, 184, 148, 0.48), transparent 62%);
+  animation: driftOne 14s ease-in-out infinite alternate;
+}
+
+.mesh-two {
+  right: -12vw;
+  top: 14vh;
+  background: radial-gradient(circle, rgba(217, 70, 239, 0.36), transparent 64%);
+  animation: driftTwo 16s ease-in-out infinite alternate;
+}
+
+.mesh-three {
+  left: 34vw;
+  bottom: -18vh;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.34), transparent 66%);
+  animation: driftThree 18s ease-in-out infinite alternate;
+}
+
+.grid-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  background:
+    linear-gradient(rgba(59, 130, 246, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 184, 148, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 50% 28%, black, transparent 72%);
+  animation: gridFloat 20s linear infinite;
+}
+
 #signalCanvas {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   opacity: 0.62;
 }
 
@@ -505,6 +556,35 @@ h3 { font-size: 24px; line-height: 1.15; }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@keyframes driftOne {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(12vw, 10vh, 0) scale(1.12); }
+}
+
+@keyframes driftTwo {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(-12vw, 14vh, 0) scale(1.08); }
+}
+
+@keyframes driftThree {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(8vw, -12vh, 0) scale(1.16); }
+}
+
+@keyframes gridFloat {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 72px 72px, 72px 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh,
+  .grid-glow,
+  .reveal {
+    animation: none;
+    transition: none;
+  }
 }
 
 @media (max-width: 900px) {
