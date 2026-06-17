@@ -64,6 +64,7 @@ const visitCountdown = document.getElementById("visitCountdown");
 const miniSnakeCanvas = document.getElementById("miniSnakeCanvas");
 const miniSnakeScore = document.getElementById("miniSnakeScore");
 const miniSnakeRestart = document.getElementById("miniSnakeRestart");
+const miniSnakeStart = document.getElementById("miniSnakeStart");
 
 function updateVisitCountdown() {
   if (!visitCountdown) return;
@@ -146,6 +147,8 @@ function initMiniSnake() {
   let dir = { x: 1, y: 0 };
   let next = dir;
   let score = 0;
+  let active = false;
+  let timer = null;
 
   function reset() {
     snake = [{ x: 5, y: 5 }, { x: 4, y: 5 }, { x: 3, y: 5 }];
@@ -157,7 +160,16 @@ function initMiniSnake() {
     draw();
   }
 
+  function startGame() {
+    if (active) return;
+    active = true;
+    miniSnakeStart?.classList.add("hidden");
+    miniSnakeCanvas.focus({ preventScroll: true });
+    timer = setInterval(tick, 150);
+  }
+
   function setMiniDirection(value) {
+    startGame();
     if (value === "up" && dir.y !== 1) next = { x: 0, y: -1 };
     if (value === "down" && dir.y !== -1) next = { x: 0, y: 1 };
     if (value === "left" && dir.x !== 1) next = { x: -1, y: 0 };
@@ -172,6 +184,7 @@ function initMiniSnake() {
   }
 
   function tick() {
+    if (!active) return;
     dir = next;
     const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
     const crashed = head.x < 0 || head.y < 0 || head.x >= cols || head.y >= rows || snake.some(part => part.x === head.x && part.y === head.y);
@@ -210,18 +223,36 @@ function initMiniSnake() {
   }
 
   document.querySelectorAll("[data-mini-dir]").forEach(button => {
-    button.addEventListener("click", () => setMiniDirection(button.dataset.miniDir));
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      setMiniDirection(button.dataset.miniDir);
+    });
   });
   window.addEventListener("keydown", event => {
+    if (!active || document.activeElement !== miniSnakeCanvas) return;
     const key = event.key.toLowerCase();
+    const directionKeys = ["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"];
+    if (!directionKeys.includes(key)) return;
+    event.preventDefault();
     if (key === "arrowup" || key === "w") setMiniDirection("up");
     if (key === "arrowdown" || key === "s") setMiniDirection("down");
     if (key === "arrowleft" || key === "a") setMiniDirection("left");
     if (key === "arrowright" || key === "d") setMiniDirection("right");
   });
-  miniSnakeRestart.addEventListener("click", reset);
+  miniSnakeCanvas.addEventListener("click", startGame);
+  miniSnakeCanvas.addEventListener("touchstart", event => {
+    event.preventDefault();
+    startGame();
+  }, { passive: false });
+  miniSnakeStart?.addEventListener("click", event => {
+    event.preventDefault();
+    startGame();
+  });
+  miniSnakeRestart.addEventListener("click", () => {
+    reset();
+    startGame();
+  });
   reset();
-  setInterval(tick, 150);
 }
 
 askForm.addEventListener("submit", event => {

@@ -133,7 +133,10 @@
           </div>
         </div>
         <div class="mini-game">
-          <canvas id="miniSnakeCanvas" width="360" height="220" aria-label="Mini Snake game"></canvas>
+          <div class="mini-canvas-wrap">
+            <canvas id="miniSnakeCanvas" width="360" height="220" aria-label="Mini Snake game" tabindex="0"></canvas>
+            <button id="miniSnakeStart" class="game-start" type="button">Click to start</button>
+          </div>
           <div class="mini-controls" aria-label="Mini Snake controls">
             <button data-mini-dir="up" type="button">Up</button>
             <button data-mini-dir="left" type="button">Left</button>

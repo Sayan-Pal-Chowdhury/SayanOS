@@ -120,6 +120,9 @@ function setDirection(value) {
 
 window.addEventListener("keydown", event => {
   const key = event.key.toLowerCase();
+  const directionKeys = ["arrowup", "arrowdown", "arrowleft", "arrowright", "w", "a", "s", "d"];
+  if (!directionKeys.includes(key)) return;
+  event.preventDefault();
   if (key === "arrowup" || key === "w") setDirection("up");
   if (key === "arrowdown" || key === "s") setDirection("down");
   if (key === "arrowleft" || key === "a") setDirection("left");
@@ -127,10 +130,29 @@ window.addEventListener("keydown", event => {
 });
 
 document.querySelectorAll(".touch-pad button").forEach(button => {
-  button.addEventListener("click", () => setDirection(button.dataset.dir));
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    board.focus({ preventScroll: true });
+    setDirection(button.dataset.dir);
+  });
+  button.addEventListener("touchstart", event => {
+    event.preventDefault();
+    board.focus({ preventScroll: true });
+    setDirection(button.dataset.dir);
+  }, { passive: false });
 });
 
-restartBtn.addEventListener("click", reset);
+board.addEventListener("click", () => board.focus({ preventScroll: true }));
+board.addEventListener("touchstart", event => {
+  event.preventDefault();
+  board.focus({ preventScroll: true });
+}, { passive: false });
+
+restartBtn.addEventListener("click", event => {
+  event.preventDefault();
+  reset();
+  board.focus({ preventScroll: true });
+});
 bestEl.textContent = best;
 reset();
 setInterval(tick, 105);
