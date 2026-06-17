@@ -101,7 +101,7 @@ function draw() {
     ctx.textAlign = "center";
     ctx.fillText("System paused", board.width / 2, board.height / 2 - 4);
     ctx.font = "500 14px Inter";
-    ctx.fillText("Press Restart to run again", board.width / 2, board.height / 2 + 24);
+    ctx.fillText("Click the board to restart", board.width / 2, board.height / 2 + 24);
   }
 }
 
@@ -142,9 +142,13 @@ document.querySelectorAll(".touch-pad button").forEach(button => {
   }, { passive: false });
 });
 
-board.addEventListener("click", () => board.focus({ preventScroll: true }));
+board.addEventListener("click", () => {
+  if (!alive) reset();
+  board.focus({ preventScroll: true });
+});
 board.addEventListener("touchstart", event => {
   event.preventDefault();
+  if (!alive) reset();
   board.focus({ preventScroll: true });
 }, { passive: false });
 

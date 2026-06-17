@@ -510,8 +510,12 @@ h3 { font-size: 24px; line-height: 1.15; }
 
 .mini-controls {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 54px);
+  grid-template-areas:
+    ". up ."
+    "left down right";
   gap: 8px;
+  justify-content: center;
 }
 
 .mini-controls button {
@@ -521,9 +525,16 @@ h3 { font-size: 24px; line-height: 1.15; }
   color: var(--text);
   background: rgba(255, 255, 255, 0.72);
   font-weight: 800;
+  font-size: 18px;
   touch-action: manipulation;
   cursor: pointer;
+  user-select: none;
 }
+
+.mini-controls [data-mini-dir="up"] { grid-area: up; }
+.mini-controls [data-mini-dir="left"] { grid-area: left; }
+.mini-controls [data-mini-dir="down"] { grid-area: down; }
+.mini-controls [data-mini-dir="right"] { grid-area: right; }
 
 .module-card {
   min-height: 230px;
@@ -630,5 +641,5 @@ h3 { font-size: 24px; line-height: 1.15; }
   .module-grid, .feature-stats, .timeline-item { grid-template-columns: 1fr; }
   .ask-form { grid-template-columns: 1fr; }
   .footer { flex-direction: column; }
-  .mini-controls { grid-template-columns: repeat(2, 1fr); }
+  .mini-controls { grid-template-columns: repeat(3, 54px); }
 }

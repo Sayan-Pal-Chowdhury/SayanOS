@@ -68,9 +68,9 @@ const miniSnakeStart = document.getElementById("miniSnakeStart");
 
 function updateVisitCountdown() {
   if (!visitCountdown) return;
-  const key = "sayanOSPortfolioVisits";
-  const sessionKey = "sayanOSVisitCounted";
-  let visits = Number(localStorage.getItem(key) || "1000");
+  const key = "sayanOSPortfolioVisitsV2";
+  const sessionKey = "sayanOSVisitCountedV2";
+  let visits = Number(localStorage.getItem(key) || "333");
   if (!sessionStorage.getItem(sessionKey)) {
     visits += 1;
     localStorage.setItem(key, String(visits));
